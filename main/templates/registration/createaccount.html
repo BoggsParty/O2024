@@ -1,0 +1,23 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+
+<div class="w3-padding w3-container w3-responsive">
+	<div class="w3-mobile w3-display-container w3-display-middle">
+		<div class="w3-panel w3-red">
+			<p>Note: Your first name and last initial will be public!</p>
+			<p>Provide an email to be able to login to your account if you forget your password.</p>
+		</div>
+		<form method="post" action="">
+			{% csrf_token %}
+			{{ form.as_p}}
+			<p><input type="submit" value="Create new user account" /></p>
+		</form>
+	</div>
+</div>
+
+
+    
+
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+
+<div class="w3-container w3-center">
+	<p>Click <a href="/guesses/edit/all/{{sport_query.slug}}/">here</a> to quick edit your guesses.</p>
+</div>
+
+<div class="w3-container">
+	<h1>{{sport_query}}</h1>
+	<div class="w3-center">
+		<img src="/media/{{images.icon}}/" style="width:100%;max-width:240px">
+	</div>
+</div>
+
+{% if sport_query.locked %}
+<div class="w3-container w3-center">
+	<p>This sport has locked. Your saved guesses are:</p>
+	{% if sport_query.team %}			
+		<p><b>Gold:</b> {{active_guess.gold_country}}</p>
+		<p><b>Silver:</b> {{active_guess.silver_country}}</p>
+		<p><b>Bronze:</b> {{active_guess.bronze_country}}</p>
+	{% else %}
+		<p><b>Gold:</b> {{active_guess.gold_athlete}}</p> 				
+		<p><b>Silver:</b> {{active_guess.silver_athlete}}</p>
+		<p><b>Bronze:</b> {{active_guess.bronze_athlete}}</p>
+	{% endif %}
+	<p>Click <a href = "/guesses/all">here</a> to view all your guesses</p>
+</div>
+
+
+{% else %}
+
+<div class="w3-container w3-center">
+			<div class="w3-third">
+				<h3>Your Guesses</h3>
+				{% if sport_query.team %}			
+					<p><b>Gold:</b> {{active_guess.gold_country}}</p>
+					<p><b>Silver:</b> {{active_guess.silver_country}}</p>
+					<p><b>Bronze:</b> {{active_guess.bronze_country}}</p>
+				{% else %}
+					<p><b>Gold:</b> {{active_guess.gold_athlete}}</p> 				
+					<p><b>Silver:</b> {{active_guess.silver_athlete}}</p>
+					<p><b>Bronze:</b> {{active_guess.bronze_athlete}}</p>
+				{% endif %}
+				<form method="POST" class="post-form">{% csrf_token %}
+					{{ form.as_p }}
+					<button type="submit" class="save btn btn-info">Save</button>
+				</form>
+			</div>
+			<div class="w3-third">
+				<div class="w3-panel w3-blue">
+					<p><b>Locks on:</b></p>
+					<p>{{sport_query.lock_date}} at 11:59 PM CST</p>
+					<p><b>Final event:</b></p>
+					<p>{{sport_query.awarded_date}}</p>
+					<p>Click <a class="black" target="_blank" href="{{sport_query.ass_link}}">here</a> to view international rankings.</p>
+				</div>
+			</div>
+			<div class="w3-third">
+				<img src="/media/{{images.picture}}/" height="210">
+			</div>
+</div>
+{% endif %}
+{% endblock %}

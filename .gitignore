@@ -1,0 +1,27 @@
+# Python
+*.pyc
+*~
+__pycache__
+
+# Env
+.env
+olympicsVE/
+myvenv/
+venv/
+
+# Database
+db.sqlite3
+
+# folders
+/static/
+/ignore/
+/media/
+
+# Windows
+Thumbs.db*
+ehthumbs*.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# other
+mysite/settings.py

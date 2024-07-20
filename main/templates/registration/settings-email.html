@@ -1,0 +1,19 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+<div class="w3-container w3-responsive">
+    <div class="w3-row">
+		<h1>Email Settings</h1>
+    </div>
+</div>
+
+<div class="w3-container w3-responsive w3-center">
+	<div class="w3-row w3-padding">
+    <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
+        <p>Email: {{form.email}}</p>
+		<p>Subscribe to daily emails: {{form.subscribe}}<p>
+		<button type="submit" class="save btn btn-default">Save</button>
+	</form>     
+</div>
+
+{% endblock %}

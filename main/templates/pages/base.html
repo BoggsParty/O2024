@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<body>
+    <header>
+        <title>Paris 2024</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+		<link rel="stylesheet" href="{% static 'css/base.css' %}">
+    </header>
+	<main>
+	{% if show_logout %}
+	<div class="w3-bar w3-yellow">
+		<a href="/" class="w3-bar-item w3-button w3-hover-red">Scores</a>
+		<a href="/guesses/all/" class="w3-bar-item w3-button w3-hide-small w3-hover-red">Guesses</a>
+		<a href="/sports/all/" class="w3-bar-item w3-button w3-hide-small w3-hover-red">Events</a>
+		<a href="/about/" class="w3-bar-item w3-button w3-hide-small w3-hover-red">About</a>
+		<a href="/accounts/logout/" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">Logout</a>
+		<a href="/settings/" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">Account</a>
+		<a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium w3-hover-red" onclick="myFunction()">&#9776;</a>
+	</div>
+	
+	<div id="demo" class="w3-bar-block w3-yellow w3-hide">
+		<a href="/guesses/all/" class="w3-bar-item w3-button w3-hover-red">Guesses</a>
+		<a href="/sports/all/" class="w3-bar-item w3-button w3-hover-red">Events</a>
+		<a href="/about/" class="w3-bar-item w3-button w3-hover-red">About</a>
+		<a href="/settings/" class="w3-bar-item w3-button w3-hover-red">Account</a>
+		<a href="/accounts/logout/" class="w3-bar-item w3-button w3-hover-red">Logout</a>
+	</div>	
+	{% else %}
+	<div class="w3-bar w3-yellow">
+		<a href="/" class="w3-bar-item w3-button w3-hover-red">Scores</a>
+		<a href="/guesses/all/" class="w3-bar-item w3-button w3-hide-small w3-hover-red">Guesses</a>
+		<a href="/sports/all/" class="w3-bar-item w3-button w3-hide-small w3-hover-red">Events</a>
+		<a href="/about/" class="w3-bar-item w3-button w3-hide-small w3-hover-red">About</a>
+		<a href="/accounts/login/" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">Login</a>
+		<a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium w3-hover-red" onclick="myFunction()">&#9776;</a>
+	</div>
+	
+	<div id="demo" class="w3-bar-block w3-yellow w3-hide">
+		<a href="/guesses/all/" class="w3-bar-item w3-button w3-hover-red">Guesses</a>
+		<a href="/sports/all/" class="w3-bar-item w3-button w3-hover-red">Events</a>
+		<a href="/about/" class="w3-bar-item w3-button w3-hover-red">About</a>
+		<a href="/accounts/login/" class="w3-bar-item w3-button w3-hover-red">Login</a>
+	</div>	
+	{% endif %}
+	    {% block content %}
+        {% endblock %}
+		
+	</main>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("demo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
+</body>
+</html>

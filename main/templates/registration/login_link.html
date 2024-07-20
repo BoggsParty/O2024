@@ -1,0 +1,22 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+
+<div class="w3-container w3-mobile">
+	<div class="w3-row">
+		<p>Please enter the email connected to your account to be sent a link to login.</p>
+
+		<form method="post">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit" value="Submit">
+		</form>
+		
+		<div class="w3-red">
+			<p>Note: Accounts from 2022 were deleted, if you have not created an account for 2024, click <a class="black" href="/register/">here<a></p>	
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+

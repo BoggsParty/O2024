@@ -1,0 +1,133 @@
+{% extends 'pages/base.html' %}
+
+
+{% block content %}
+<div class="w3-container w3-mobile">
+	<div class="w3-row">
+		<h1>Your Guesses</h1>
+	</div>	
+	<div class="w3-row w3-center">
+		<p>Click <a href="{{all_guesses_sport.slug}}/">here</a> to view everyone's guesses for locked events.</p>
+	</div>
+	
+	<div class="w3-row w3-center w3-panel w3-blue">
+		<h2>Open Team Events</h2>
+	</div>
+	<table class="w3-table w3-centered w3-striped">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Sport</th>
+				<th>Gold</th>
+				<th>Silver</th>
+				<th>Bronze</th>
+				<th>Locks 11:59 PM CST</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for open_team_guesses in open_team_guesses %}
+			<tr>
+				<td><img src="/media/{{open_team_guesses.sport.slug}}.jpg/" style="width:100%;max-width:60px"></td>
+				<td><a href="/guesses/edit/{{open_team_guesses.sport.slug}}/">{{ open_team_guesses.sport }}</a></td>
+				<td>{{ open_team_guesses.gold_country }}</td>
+				<td>{{ open_team_guesses.silver_country }}</td>
+				<td>{{ open_team_guesses.bronze_country }}</td>
+				<td>{{ open_team_guesses.sport.lock_date }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	<div class="w3-row w3-center w3-panel w3-blue">
+		<h2>Open Individual Events</h2>
+	</div>
+	<table class="w3-table w3-centered w3-striped">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Sport</th>
+				<th>Gold</th>
+				<th>Silver</th>
+				<th>Bronze</th>
+				<th>Locks 11:59 PM CST</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for open_individual_guesses in open_individual_guesses %}
+			<tr>
+				<td><img src="/media/{{open_individual_guesses.sport.slug}}.jpg/" style="width:100%;max-width:60px"></td>
+				<td><a href="/guesses/edit/{{open_individual_guesses.sport.slug}}/">{{ open_individual_guesses.sport }}</a></td>
+				<td>{{ open_individual_guesses.gold_athlete }}</td>
+				<td>{{ open_individual_guesses.silver_athlete }}</td>
+				<td>{{ open_individual_guesses.bronze_athlete }}</td>
+				<td>{{ open_individual_guesses.sport.lock_date }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+
+	<div class="w3-row w3-center w3-panel w3-blue">
+		<h2>Locked Team Events</h2>
+	</div>
+		<table class="w3-table w3-card w3-centered">
+			{% for locked_team_guesses in locked_team_guesses %}
+				<thead class="w3-gray">
+				<tr>
+					<th>{{locked_team_guesses.sport}}</th>
+					<th>Gold</th>
+					<th>Silver</th>
+					<th>Bronze</th>
+					<th>Score</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>Your Guesses</td>
+					<td>{{locked_team_guesses.gold_country}}</td>
+					<td>{{locked_team_guesses.silver_country}}</td>
+					<td>{{locked_team_guesses.bronze_country}}</td>
+					<td>{{locked_team_guesses.score}}</td>
+				</tr>
+				<tr>
+					<td>Winners</td>
+					<td>{{locked_team_guesses.sport.gold_country}}</td>
+					<td>{{locked_team_guesses.sport.silver_country}}</td>
+					<td>{{locked_team_guesses.sport.bronze_country}}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	
+	<div class="w3-row w3-center w3-panel w3-blue">
+		<h2>Locked Individual Events</h2>
+	</div>
+		<table class="w3-table w3-centered">
+			{% for locked_individual_guesses in locked_individual_guesses %}
+			<thead class="w3-gray">
+				<tr>
+					<th>{{locked_individual_guesses.sport}}</th>
+					<th>Gold</th>
+					<th>Silver</th>
+					<th>Bronze</th>
+					<th>Score</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Your Guesses</td>
+					<td>{{locked_individual_guesses.gold_athlete}}</td>
+					<td>{{locked_individual_guesses.silver_athlete}}</td>
+					<td>{{locked_individual_guesses.bronze_athlete}}</td>
+					<td>{{locked_individual_guesses.score}}</td>
+				</tr>
+				<tr>
+					<td>Winners</td>
+					<td>{{locked_individual_guesses.sport.gold_athlete}}</td>
+					<td>{{locked_individual_guesses.sport.silver_athlete}}</td>
+					<td>{{locked_individual_guesses.sport.bronze_athlete}}</td>
+				</tr>
+			</tbody>
+			{% endfor %}
+		</table>
+	</div>
+</div>	
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+
+<div class="w3-container w3-center">
+	{% if form.errors %}
+		<p>Your username and password didn't match. Please try again.</p>
+	{% endif %}
+
+	{% if next %}
+		{% if user.is_authenticated %}
+			<p>Your account doesn't have access to this page. To proceed,
+			please login with an account that has access.</p>
+		{% else %}
+		
+		{% endif %}
+	{% endif %}
+</div>
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+
+<div class="w3-row w3-center">
+	<p>Please login below.</p>
+</div>
+
+<div class="w3-container w3-center">
+	<div class="w3-row w3-padding">
+		{{ form.username.label_tag }} {{ form.username }}
+	</div>
+	<div class="w3-row w3-padding">
+		{{ form.password.label_tag }} {{ form.password }}
+	</div>
+
+<input type="submit" value="Login">
+<input type="hidden" name="next" value="{{ next }}">
+</form>
+</div>
+<div class="w3-container w3-center">
+	<div class="w3-row w3-padding">
+		<p>Don't feel like typing your password (or don't remember your password)? Click <a href="/login-link/">here</a> to request a login link</p>
+
+
+<div class="w3-container w3-center w3-blue">
+	<p>Click <a href="/register/">here</a> to create an account for 2024.</p>
+	<p>Please note, accounts from 2022 were deleted.</p>
+
+{% endblock %}
+

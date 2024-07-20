@@ -1,0 +1,33 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}    
+
+	<div class="w3-container w3-mobile">
+		<h2>Team Events</h2>
+	</div>
+	{% for team_sports in team_sports %}
+		<div class="w3-quarter w3-container w3-mobile">
+			<img src="/media/{{team_sports.slug}}.jpg" style="width:100%;max-width:60px">
+			{% if team_sports.locked %}
+			<a href="/guesses/all/{{team_sports.slug}}/" class="w3-center">{{ team_sports.sport_name}}</a>
+			{% else %}
+			<a href="/guesses/edit/{{team_sports.slug}}/" class="w3-center">{{ team_sports.sport_name }}</a>
+			{% endif %}
+		</div>
+	{% endfor %}
+	
+	<div class="w3-container w3-mobile">
+		<h2>Individual Events</h2>
+	</div>
+	{% for individual_sports in individual_sports %}
+		<div class="w3-quarter w3-container w3-mobile">
+			<img src="/media/{{individual_sports.slug}}.jpg" style="width:100%;max-width:60px">
+			{% if individual_sports.locked %}
+			<a href="/guesses/all/{{individual_sports.slug}}/" class="w3-center">{{ individual_sports.sport_name}}</a>
+			{% else %}
+			<a href="/guesses/edit/{{individual_sports.slug}}/" class="w3-center">{{ individual_sports.sport_name }}</a>
+			{% endif %}
+		</div>
+	{% endfor %}
+	
+{% endblock %}

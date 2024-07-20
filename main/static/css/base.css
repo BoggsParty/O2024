@@ -1,0 +1,31 @@
+
+/* Navigation */
+
+.w3-yellow {
+	color:black!important; background-color:#FCB131!important;
+}
+
+.w3-red {
+	color:white!important; background-color:#EE334E!important;
+}
+
+.w3-green {
+	color:white!important; background-color:#00A651!important;
+}
+
+.w3-blue {
+	color:white!important; background-color:#0081C8!important;
+}
+
+h1 {
+	text-align: center;
+}
+
+a {
+	color:#00A651;
+	font-weight:bold;
+}
+
+a.black {
+	color:black
+}

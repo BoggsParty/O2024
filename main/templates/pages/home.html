@@ -1,0 +1,28 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+
+<div class="w3-container">
+	<div class="w3-row">
+		<h1>Scores</h1>
+	</div>
+	<div class="w3-content">
+		<table class="w3-table w3-striped">
+			<thead class="w3-blue">
+				<tr>
+					<th>Participant</th>
+					<th>Score</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for scores in scores %}
+				<tr>
+					<td>{{ scores.user.first_name }} {{scores.user.last_name|slice:"1"}}</td>
+					<td>{{ scores.score }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>	
+</div>
+{% endblock %}

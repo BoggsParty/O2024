@@ -1,0 +1,12 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+	<div class="row">
+		<p>Click <a href="/guesses/edit/all/{{first_sport.slug}}/">here</a> to enter your guesses for each sport (you can change them up until they lock).</p>
+		
+		<p>Or click <a href="/guesses/all/">here</a> to view all open sports.</p>
+	</div>
+</div>
+{% endblock %}

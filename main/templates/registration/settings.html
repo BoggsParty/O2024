@@ -1,0 +1,31 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+<div class="w3-container w3-responsive">
+    <div class="w3-row">
+		<h1>User Settings</h1>
+    </div>
+</div>
+
+<div class="w3-container w3-responsive w3-center">
+	<div class="w3-row w3-padding">
+    <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
+        <h3>Username: {{edit_user.username }}</h3>
+        <p>First Name: {{form.first_name}}</p>
+        <p>Last Name: {{form.last_name}}</p>
+		<p>Your first name and last initial will be public.<p>
+		<button type="submit" class="save btn btn-default">Save</button>
+	</form>     
+</div>
+
+<div class="w3-container w3-responsive w3-center w3-light-blue">
+	<p>Your current email is: <b>{{subscribe.email}}</b></p>
+	{% if subscribe.subscribe %}
+		<p>You are currently SUBSCRIBED to receive daily emails.</p>
+	{% else %}
+		<p>You are currently NOT SUBSCRIBED to receive daily emails.</p>
+	{% endif %}
+	<p>Click <a href="/email-settings/">here</a> to change your email settings<p>
+</div>
+
+{% endblock %}
