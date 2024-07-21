@@ -111,7 +111,7 @@ def request_link(request):
                 user = User.objects.get(id=user_email.user.id)
                 link = MagicLink.objects.create(user=user)
                 url = get_current_site(request).domain
-                email_body = "Hello, "+user.username+".\r\nPlease use this link to login to your account: https://"+url+"/magic_link/"+str(link.token)+"/ \r\nIf you did not request this link, please reply back to this email."
+                email_body = "Hello, "+user.username+".\r\nPlease use this link to login to your account: http://"+url+"/magic_link/"+str(link.token)+"/ \r\nIf you did not request this link, please reply back to this email."
                 send_mail (
                     'Login Link',
                     email_body,
