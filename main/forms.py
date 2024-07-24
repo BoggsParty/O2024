@@ -24,6 +24,12 @@ class EmailReminderForm(forms.ModelForm):
         model = EmailReminder
         fields = ("email","subscribe")
         
+class EmailNoThankYouForm(forms.ModelForm):
+    
+    class Meta:
+        model = EmailReminder
+        fields = ('NTY',)
+        
 class LoginEmailForm(forms.Form):
     email = forms.EmailField()
 

@@ -17,4 +17,5 @@ urlpatterns = [
     path('magic_link/', include(magic_link_urls)),
     path('login-link/', views.request_link, name='request_link'),
     path('3480980284/daily_email/', views.email, name='email'),
+    #path('test/', views.test, name='test'),
 ]

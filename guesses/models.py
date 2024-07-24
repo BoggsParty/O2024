@@ -36,6 +36,7 @@ class Score(models.Model):
 class EmailReminder(models.Model): 
     user = models.OneToOneField(User, on_delete=models.CASCADE, parent_link=False)
     subscribe = models.BooleanField(default=False)
+    NTY = models.BooleanField(default=False)
     email = models.EmailField(blank=True, null=True, unique=True)
     
     def __str__(self):

@@ -15,7 +15,7 @@ from sports.models import Sport
 from guesses.models import Score, Guess, EmailReminder, DailyEmail
 from django.conf import settings
 from magic_link.models import MagicLink
-from .forms import Edit_SettingsForm, SignUpForm, LoginEmailForm, EmailReminderForm
+from .forms import Edit_SettingsForm, SignUpForm, LoginEmailForm, EmailReminderForm, EmailNoThankYouForm
 
 #account registration etc. --------------------------------
 def logout(request):
@@ -180,18 +180,71 @@ def email_settings(request):
         form = EmailReminderForm(instance=subscribe)
     return render(request, 'registration/settings-email.html', {'show_logout':show_logout,'edit_user':edit_user,'form':form,'subscribe':subscribe})
 
+def test(request):
+    if request.user.is_anonymous:
+        show_logout = False
+        show_subscribe_message = False
+        form = None
+    else:
+        show_logout = True
+
+    edit_user = request.user
+    subscribe = EmailReminder.objects.get(user = edit_user)
+    
+    if subscribe.NTY:
+        show_subscribe_message = False
+        form = None
+    elif subscribe.subscribe:
+        show_subscribe_message = False
+        form = None
+    else:
+        show_subscribe_message = True
+        if request.method == "POST":
+            form = EmailNoThankYouForm(request.POST,request.FILES, instance = subscribe)
+            if form.is_valid():
+                email_settings = form.save(commit=False)
+                email_settings.NTY = True
+                email_settings.save()
+                return redirect('home')
+        else:
+            form = EmailNoThankYouForm(instance=subscribe)
+            
+    return render(request, 'registration/test.html', {'form':form,'show_logout':show_logout,'show_subscribe_message':show_subscribe_message})
+
 
 # main pages that do not require login. See guess views for the rest of the site ---------------------------
 
 def home(request):
     if request.user.is_anonymous:
         show_logout = False
+        show_subscribe_message = False
+        form = None
     else:
         show_logout = True
+        edit_user = request.user
+        subscribe = EmailReminder.objects.get(user = edit_user)
+    
+        if subscribe.NTY:
+            show_subscribe_message = False
+            form = None
+        elif subscribe.subscribe:
+            show_subscribe_message = False
+            form = None
+        else:
+            show_subscribe_message = True
+            if request.method == "POST":
+                form = EmailNoThankYouForm(request.POST,request.FILES, instance = subscribe)
+                if form.is_valid():
+                    email_settings = form.save(commit=False)
+                    email_settings.NTY = True
+                    email_settings.save()
+                return redirect('home')
+            else:
+                form = EmailNoThankYouForm(instance=subscribe)
         
     scores = Score.objects.all().order_by('score')
 
-    return render(request,'pages/home.html', {'scores':scores,'show_logout':show_logout})
+    return render(request,'pages/home.html', {'scores':scores,'show_logout':show_logout,'show_subscribe_message':show_subscribe_message,'form':form,})
     
 def sports_menu(request):
     if request.user.is_anonymous:
