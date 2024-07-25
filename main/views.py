@@ -242,7 +242,7 @@ def home(request):
             else:
                 form = EmailNoThankYouForm(instance=subscribe)
         
-    scores = Score.objects.all().order_by('score')
+    scores = Score.objects.all().order_by('-score')
 
     return render(request,'pages/home.html', {'scores':scores,'show_logout':show_logout,'show_subscribe_message':show_subscribe_message,'form':form,})
     
