@@ -79,7 +79,7 @@ def calculate(request):
             #print (guess_score.score)
             guess_score.save()
     
-    user_total = User.objects.exclude(is_staff=True)
+    user_total = User.objects.exclude(username='jkuzel')
     for user in user_total:
         total_score = Guess.objects.filter(user=user).aggregate(Sum('score'))
         user_score = Score.objects.get(user=user)
