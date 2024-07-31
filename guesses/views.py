@@ -99,29 +99,32 @@ def all_guesses(request):
     show_logout = True
     
     open_team_guesses = Guess.objects.filter(user = request.user).filter(sport__locked=False).filter(sport__team=True).order_by('sport__order')
-    locked_team_guesses = Guess.objects.filter(user = request.user).filter(sport__locked=True).filter(sport__team=True).order_by('sport__order')
+    locked_team_guesses = Guess.objects.filter(user = request.user).filter(sport__locked=True).filter(sport__team=True).order_by('-sport__order')
     open_individual_guesses = Guess.objects.filter(user = request.user).filter(sport__locked=False).filter(sport__team=False).order_by('sport__order')
-    locked_individual_guesses = Guess.objects.filter(user = request.user).filter(sport__locked=True).filter(sport__team=False).order_by('sport__order')
-    print(open_team_guesses)
-    try:
-        locked_team_sport = Sport.objects.filter(locked=True).first()
-    except:
-        locked_team_sport = None
+    locked_individual_guesses = Guess.objects.filter(user = request.user).filter(sport__locked=True).filter(sport__team=False).order_by('-sport__order')
+    all_guesses_sport = Sport.objects.filter(locked=True).order_by('order').last()
     
-    try:
-        locked_individual_sport = Sport.objects.filter(locked=True).first()
-    except:
-        locked_individual_sport = None
+    
+    #clean this up for next time, need to account for when only one sport is locked
+    #try:
+     #   locked_team_sport = Sport.objects.filter(locked=True).first()
+    #except:
+     #   locked_team_sport = None
+    
+    #try:
+     #   locked_individual_sport = Sport.objects.filter(locked=True).first()
+    #except:
+     #   locked_individual_sport = None
    
-    if None not in (locked_individual_sport, locked_team_sport):
-        if locked_team_sport.order > locked_individual_sport.order:
-            all_guesses_sport = locked_individual_sport
-        else: 
-            all_guesses_sport = locked_team_sport
-    elif locked_individual_sport == None:
-        all_guesses_sport = locked_team_sport
-    else:
-        all_guesses_sport = locked_individual_sport
+    #if None not in (locked_individual_sport, locked_team_sport):
+     #   if locked_team_sport.order > locked_individual_sport.order:
+      #      all_guesses_sport = locked_individual_sport
+       # else: 
+        #    all_guesses_sport = locked_team_sport
+    #elif locked_individual_sport == None:
+     #   all_guesses_sport = locked_team_sport
+    #else:
+     #   all_guesses_sport = locked_individual_sport
         
     return render(request,'guesses/guesses.html', {'show_logout':show_logout, 'open_team_guesses':open_team_guesses,'open_individual_guesses':open_individual_guesses,'locked_team_guesses':locked_team_guesses,'locked_individual_guesses':locked_individual_guesses,'all_guesses_sport':all_guesses_sport})
   
